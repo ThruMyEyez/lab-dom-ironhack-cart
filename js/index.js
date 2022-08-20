@@ -1,5 +1,5 @@
-// ITERATION 1
-//! Not altering the Markup & CSS
+//* ITERATION 1
+//* Not altering the Markup & CSS documents. JS DOM only ==>
 function updateSubtotal(product) {
   console.log('Calculating subtotal, yey!');
 
@@ -20,7 +20,7 @@ function calculateAll() {
   updateSubtotal(singleProduct);*/
   // end of test
 
-  // ITERATION 2
+  //* ITERATION 2
   //... your code goes here
   const products = document.querySelectorAll('.product'),
     productsArr = [...products],
@@ -31,14 +31,14 @@ function calculateAll() {
   productsArr.forEach((product) => {
     productsSum += updateSubtotal(product);
   });
-  //  ITERATION 3
+  //*  ITERATION 3
   //... your code goes here
   totalAll.innerText = productsSum;
   // console.log(totalAll);
   // console.log(productsSum);
 }
 
-// ITERATION 4
+//* ITERATION 4
 
 function removeProduct(event) {
   //... your code goes here
@@ -46,24 +46,23 @@ function removeProduct(event) {
   // removeBtns = document.querySelectorAll('.btn-remove'); // garbage code
   target.parentNode.removeChild(target);
   calculateAll();
-  console.log('The target in remove is:', target);
+  //console.log('The target in remove is:', target);
 }
 
-// ITERATION 5
+//* ITERATION 5
 
 function createProduct() {
   //... your code goes here
-  // you can create and interact with elements which aren't placed on the page, after that you can add them to page.
-  // element at which to append =>
+  // element and Value Variables  =>
   const tbody = document.querySelector('tbody'),
     tRow = document.createElement('tr'),
     priceValue = document.querySelector(
-      '.create-product input:last-child'
+      '.create-product input[type="number"]'
     ).value,
     nameValue = document.querySelector(
       '.create-product input:first-child'
     ).value;
-  //* Markup Var
+  //* Markup Var | this is the qu
   const trMarkup = `
   <td class="name">
     <span>${nameValue}</span>
@@ -80,11 +79,13 @@ function createProduct() {
 
   tRow.className = 'product';
   tRow.innerHTML = trMarkup;
-  // append the final child element =>
-  const addRow = tbody.insertRow(-1); //.createElement('td');
-  addRow.appendChild(tRow);
-  // testing
-  console.log(tRow, trMarkup);
+  //* make the new Row removable ==>
+  const rmButton = tRow.querySelector('button');
+  rmButton.addEventListener('click', removeProduct);
+  //* append the final child element =>
+  tbody.appendChild(tRow);
+  //* testing
+  console.log(tRow, 'trMarkup', rmButton);
 }
 
 window.addEventListener('load', () => {
