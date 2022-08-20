@@ -55,42 +55,36 @@ function createProduct() {
   //... your code goes here
   // you can create and interact with elements which aren't placed on the page, after that you can add them to page.
   // element at which to append =>
-  const tableEl = document.querySelector('tbody');
-  //tableEl.className = 'product';
-  // create the row element and its child nodes & values =>
-  // the tr-name element with childnodes =>
-  const trProduct = document.createElement('tr');
-  trProduct.setAttribute('class', 'product');
-  //* the tdName element with span =>
-  const tdName = document.createElement('td');
-  tdName.className = 'name';
-  const tdNameSpan = document.createElement('span'),
+  const tbody = document.querySelector('tbody'),
+    tRow = document.createElement('tr'),
+    priceValue = document.querySelector(
+      '.create-product input:last-child'
+    ).value,
     nameValue = document.querySelector(
       '.create-product input:first-child'
     ).value;
-  tdNameSpan.innerText = nameValue;
-  tdName.appendChild(tdNameSpan);
-  //* the tdPrice element with span =>
-  const tdPrice = document.createElement('td'),
-    tdPriceSpan = document.createElement('span'),
-    priceValue = document.querySelector(
-      '.create-product input:last-child'
-    ).value;
+  //* Markup Var
+  const trMarkup = `
+  <td class="name">
+    <span>${nameValue}</span>
+  </td>
+  <td class="price">$<span>${priceValue}</span></td>
+  <td class="quantity">
+    <input type="number" value="0" min="0" placeholder="Quantity" />
+  </td>
+  <td class="subtotal">$<span>0</span></td>
+  <td class="action">
+    <button class="btn btn-remove">Remove</button>
+  </td>
+`;
 
-  tdPrice.className = 'price';
-  tdPrice.innerText = '$';
-  tdPriceSpan.innerText = priceValue;
-  tdPrice.appendChild(tdPriceSpan);
-  //let rowToAdd = document.createElement('tr').setAttribute('class', 'product');
-  //rowToAdd.setAttribute('class', 'product');
-
-  //console.log(rowToAdd);
-  //tableEl.appendChild(rowToAdd);
+  tRow.className = 'product';
+  tRow.innerHTML = trMarkup;
   // append the final child element =>
-  const addRow = tableEl.insertRow(-1); //.createElement('td');
-  addRow.appendChild(tdName);
+  const addRow = tbody.insertRow(-1); //.createElement('td');
+  addRow.appendChild(tRow);
   // testing
-  console.log(tableEl, tdName, trProduct, nameValue);
+  console.log(tRow, trMarkup);
 }
 
 window.addEventListener('load', () => {
